@@ -31,14 +31,14 @@
        DESIGN TOKENS (다크 모드 & 수묵화/차콜 톤 유지)
     ========================================================================== */
     :root {
-      --bg:           #121212;
-      --bg-card:      #1c1c1c;
-      --text-primary: #ddd6cb;
-      --text-muted:   #635d56;
-      --accent:       #c5ab83;
-      --accent-glow:  rgba(197, 171, 131, 0.13);
-      --border:       rgba(197, 171, 131, 0.20);
-      --border-hover: rgba(197, 171, 131, 0.54);
+      --bg:           #0a0a0a; /* 조금 더 깊은 블랙으로 조정 */
+      --bg-card:      #161616;
+      --text-primary: #ffffff;
+      --text-muted:   #888888;
+      --accent:       #0046FF; /* 블랙북 브랜드 블루 */
+      --accent-glow:  rgba(0, 70, 255, 0.15);
+      --border:       rgba(0, 70, 255, 0.25);
+      --border-hover: rgba(0, 70, 255, 0.6);
       --radius:       11px;
       --max-w:        430px;
       --ease:         cubic-bezier(0.4, 0, 0.2, 1);
@@ -227,7 +227,7 @@
       </a>
 
       <!-- 4. 우리 거래처, 안전한지 확인하기 -->
-      <a href="https://ms.crediview.co.kr/landing?utm_source=insta&utm_medium=bio&utm_campaign=&utm_content=04" target="_blank" onclick="trackLink('service3')">
+      <a href="https://ms.crediview.co.kr/landing?utm_source=insta&utm_medium=bio&utm_campaign=&utm_content=04" class="link-btn" target="_blank" onclick="trackLink('service3')">
         <span class="btn-icon"><i data-lucide="bar-chart-3"></i></span>
         <span class="btn-body">
           <span class="btn-title">우리 거래처, 안전한지 확인하기</span>
