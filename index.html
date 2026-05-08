@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+  <title>블랙북 | 경영·재무 가이드</title>
+  <meta name="description" content="흑자도산을 막는 확실한 지표 관리 및 실전 비즈니스 인사이트" />
+
+  <style>
+    :root {
+      --bg:           #0a0a0a;
+      --bg-card:      #161616;
+      --text-primary: #ffffff;
+      --text-muted:   #888888;
+      --accent:       #0046FF; /* 블랙북 브랜드 블루 적용 */
+      --accent-glow:  rgba(0, 70, 255, 0.15);
+      --border:       rgba(0, 70, 255, 0.25);
+      --border-hover: rgba(0, 70, 255, 0.6);
+      --radius:       11px;
+      --max-w:        430px;
+      --ease:         cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background-color: var(--bg);
+      color: var(--text-primary);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', 'Apple SD Gothic Neo', sans-serif;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 3.5rem 1.25rem 5.5rem;
+      position: relative;
+    }
+
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.038; pointer-events: none; z-index: 0;
+    }
+
+    .container { position: relative; z-index: 1; width: 100%; max-width: var(--max-w); display: flex; flex-direction: column; align-items: center; }
+
+    /* 프로필 섹션 */
+    .profile { display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 2.75rem; }
+    .avatar-shell { width: 110px; height: 110px; margin-bottom: 1.3rem; position: relative; }
+    .avatar {
+      width: 110px; height: 110px; border-radius: 50%;
+      background: #191916;
+      border: 1.5px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; z-index: 1; overflow: hidden;
+    }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+    .name { font-size: 1.55rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.4rem; }
+    .tagline { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.20em; color: var(--accent); margin-bottom: 0.72rem; }
+    .bio { font-size: 0.865rem; color: var(--text-muted); line-height: 1.68; max-width: 280px; }
+
+    /* 링크 버튼 */
+    .links { width: 100%; display: flex; flex-direction: column; gap: 0.9rem; }
+    .link-btn {
+      position: relative; display: flex; align-items: center; gap: 0.9rem; width: 100%; padding: 0.95rem 1.15rem;
+      background: var(--bg-card); color: var(--text-primary); text-decoration: none; border-radius: var(--radius);
+      transition: transform 0.26s var(--ease), background 0.26s var(--ease);
+    }
+    .link-btn::before {
+      content: ''; position: absolute; inset: -1px; border-radius: calc(var(--radius) + 1px);
+      border: 1.5px solid var(--border); filter: url(#sketch); pointer-events: none;
+    }
+    .link-btn:hover { background: #1a1a1a; transform: translateY(-2px); }
+    .link-btn:hover::before { border-color: var(--border-hover); }
+
+    .btn-icon { flex-shrink: 0; width: 38px; height: 38px; border-radius: 8px; background: rgba(0, 70, 255, 0.1); display: flex; align-items: center; justify-content: center; color: var(--accent); }
+    .btn-icon svg { width: 18px; height: 18px; stroke-width: 1.75; }
+    .btn-body { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+    .btn-title { font-size: 0.95rem; font-weight: 600; color: var(--text-primary); }
+    .btn-sub { font-size: 0.72rem; color: var(--text-muted); margin-top: 0.1rem; }
+    .btn-arrow { flex-shrink: 0; color: var(--text-muted); transition: transform 0.26s var(--ease); }
+    .link-btn:hover .btn-arrow { transform: translate(3px, -3px); color: var(--accent); }
+
+    .divider { width: 100%; display: flex; align-items: center; gap: 0.85rem; margin: 2.3rem 0 1.55rem; color: var(--text-muted); font-size: 0.67rem; text-transform: uppercase; }
+    .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    
+    .socials { display: flex; gap: 1rem; }
+    .social-a { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-muted); text-decoration: none; }
+    .social-a:hover { color: var(--accent); border-color: var(--border-hover); transform: translateY(-2px); }
+
+    footer { margin-top: 3rem; font-size: 0.7rem; color: var(--text-muted); opacity: 0.52; text-align: center; }
+  </style>
+</head>
+
+<body>
+  <!-- 수묵화/숯 질감 필터 -->
+  <svg style="position:absolute;width:0;height:0;">
+    <filter id="sketch"><feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="3" seed="11"/><feDisplacementMap in="SourceGraphic" scale="2.5"/></filter>
+  </svg>
+
+  <div class="container">
+    <section class="profile">
+      <div class="avatar-shell">
+        <div class="avatar">
+          <!-- 깃허브에 올리신 logo 파일을 불러옵니다. 확장자가 다를 경우(예: logo.png) 수정이 필요할 수 있습니다. -->
+          <img src="logo" alt="블랙북 로고">
+        </div>
+      </div>
+      <h1 class="name">블랙북</h1>
+      <p class="tagline">경영·재무 가이드</p>
+      <p class="bio">흑자도산을 막는 확실한 지표 관리<br>실무자를 위한 비즈니스 인사이트</p>
+    </section>
+
+    <nav class="links">
+      <!-- 1. 홈페이지 -->
+      <a href="https://techfinratings.co.kr?utm_source=insta&utm_medium=bio" class="link-btn" target="_blank">
+        <span class="btn-icon"><i data-lucide="building-2"></i></span>
+        <span class="btn-body">
+          <span class="btn-title">테크핀레이팅스 홈페이지</span>
+          <span class="btn-sub">기업신용평가사 테크핀레이팅스 공식 홈페이지</span>
+        </span>
+        <span class="btn-arrow"><i data-lucide="arrow-up-right"></i></span>
+      </a>
+
+      <!-- 2. 크레디뷰 -->
+      <a href="https://crediview.co.kr?utm_source=insta&utm_medium=bio" class="link-btn" target="_blank">
+        <span class="btn-icon"><i data-lucide="layout-dashboard"></i></span>
+        <span class="btn-body">
+          <span class="btn-title">기업신용평가 크레디뷰</span>
+          <span class="btn-sub">기업신용평가등급 조회 및 발급 서비스</span>
+        </span>
+        <span class="btn-arrow"><i data-lucide="arrow-up-right"></i></span>
+      </a>
+
+      <!-- 3. AI 경영진단 (오타 수정 완료) -->
+      <a href="https://crediview.co.kr/intro/ai-report?utm_source=insta&utm_medium=bio&utm_campaign=blackbook&utm_content=03" class="link-btn" target="_blank">
+        <span class="btn-icon"><i data-lucide="shield-check"></i></span>
+        <span class="btn-body">
+          <span class="btn-title">AI가 해주는 우리회사 경영진단</span>
+          <span class="btn-sub">우리회사 경영 전략을 새롭게 해줄 'AI경영진단보고서'</span>
+        </span>
+        <span class="btn-arrow"><i data-lucide="arrow-up-right"></i></span>
+      </a>
+
+      <!-- 4. 거래처 확인 (클래스 누락 수정 완료) -->
+      <a href="https://ms.crediview.co.kr/landing?utm_source=insta&utm_medium=bio&utm_campaign=blackbook&utm_content=04" class="link-btn" target="_blank">
+        <span class="btn-icon"><i data-lucide="bar-chart-3"></i></span>
+        <span class="btn-body">
+          <span class="btn-title">우리 거래처, 안전한지 확인하기</span>
+          <span class="btn-sub">투자처부터, 거래처까지 '기업모니터링'</span>
+        </span>
+        <span class="btn-arrow"><i data-lucide="arrow-up-right"></i></span>
+      </a>
+
+      <!-- 5. 블로그 -->
+      <a href="https://crediview.co.kr/blog?utm_source=insta&utm_medium=bio&utm_campaign=blackbook&utm_content=05" class="link-btn" target="_blank">
+        <span class="btn-icon"><i data-lucide="book-open"></i></span>
+        <span class="btn-body">
+          <span class="btn-title">중소기업 재무/경영 가이드 '블랙북'</span>
+          <span class="btn-sub">신용평가사가 써내려간 경영/재무 인사이트</span>
+        </span>
+        <span class="btn-arrow"><i data-lucide="arrow-up-right"></i></span>
+      </a>
+    </nav>
+
+    <div class="divider">소셜 채널</div>
+    <div class="socials">
+      <a href="https://instagram.com/techfin_ratings" class="social-a" target="_blank"><i data-lucide="instagram"></i></a>
+      <a href="https://youtube.com/@techfin_ratings" class="social-a" target="_blank"><i data-lucide="youtube"></i></a>
+    </div>
+
+    <footer><p>© 2026 블랙북 (Blackbook)</p></footer>
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>
